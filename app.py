@@ -90,7 +90,7 @@ with col_controls:
         input_sequence = [d1, d2, d3, d4, d5]
 
     final_features = np.array(input_sequence).reshape(1, -1)
-    prediction_output = max(0.0, float(model.predict(final_features)))
+    prediction_output = max(0.0, float(model.predict(final_features[0])))
 
     # 3. Custom HTML Metrics Card Component
     html_metric_card = f"""
