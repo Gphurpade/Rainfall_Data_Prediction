@@ -87,7 +87,7 @@ with col_controls:
         d3 = st.slider("Day 3 (mm)", 0.0, 150.0, 28.0, step=0.5)
         d4 = st.slider("Day 4 (mm)", 0.0, 150.0, 45.0, step=0.5)
         d5 = st.slider("Day 5 (mm)", 0.0, 150.0, 75.0, step=0.5)
-        input_sequence = [d1, d2, d3, d4, d5]
+        input_sequence = [d1[0], d2[0], d3[0], d4[0], d5[0]]
 
     final_features = np.array(input_sequence).reshape(1, -1)
     prediction_output = max(0.0, float(model.predict(final_features[0])))
