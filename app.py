@@ -83,22 +83,24 @@ with col_controls:
     else:
         prediction_output = 0.0
         st.markdown("**Fine-tune timelines manually via grid cell sliders:**")
-        # 1. Force every single input variable to be completely flat (1D)
-        d1_flat = np.array(d1).ravel()
-        d2_flat = np.array(d2).ravel()
-        d3_flat = np.array(d3).ravel()
-        d4_flat = np.array(d4).ravel()
-        d5_flat = np.array(d5).ravel()
-        
-        # 2. Concatenate them horizontally into one single row
-        final_features = np.concatenate([d1_flat, d2_flat, d3_flat, d4_flat, d5_flat]).reshape(1, -1)
-        
-        # 3. Print the shape to your Streamlit screen for temporary debugging
-        st.write(f"DEBUG - Final Features Shape: {final_features.shape}")
-        
-        # 4. Run the prediction
-        prediction_output = max(0.0, float(model.predict(final_features)[0]))
-
+        try:
+            # 1. Force every single input variable to be completely flat (1D)
+            d1_flat = np.array(d1).ravel()
+            d2_flat = np.array(d2).ravel()
+            d3_flat = np.array(d3).ravel()
+            d4_flat = np.array(d4).ravel()
+            d5_flat = np.array(d5).ravel()
+            
+            # 2. Concatenate them horizontally into one single row
+            final_features = np.concatenate([d1_flat, d2_flat, d3_flat, d4_flat, d5_flat]).reshape(1, -1)
+            
+            # 3. Print the shape to your Streamlit screen for temporary debugging
+            st.write(f"DEBUG - Final Features Shape: {final_features.shape}")
+            
+            # 4. Run the prediction
+            prediction_output = max(0.0, float(model.predict(final_features)[0]))
+        except Exception as e:
+            st.error(f"Prediction failed: {e}")
     # 3. Custom HTML Metrics Card Component
     html_metric_card = f"""
     <div style="background-color:#f5f7fa; padding:15px; border-left: 6px solid #1e3d59; border-radius:5px; margin:20px 0;">
