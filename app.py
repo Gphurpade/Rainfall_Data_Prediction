@@ -114,7 +114,7 @@ with col_controls:
         </h2>
     </div>
     """
-    st.markdown(html_metric_card, unsafe_html=True)
+    st.markdown(html_metric_card, unsafe_allow_html=True)
 
     # 4. Dynamic HTML Dynamic Alert Banners
     if prediction_output == 0:
