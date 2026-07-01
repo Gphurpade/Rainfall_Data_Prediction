@@ -1,0 +1,18 @@
+# Web Framework
+streamlit>=1.58.0
+
+# Core Machine Learning & Boosting
+xgboost>=3.3.0
+scikit-learn>=1.4.0
+
+# Data Processing & Manipulation
+pandas>=2.2.0
+numpy>=1.26.0
+
+# Data Visualization
+matplotlib>=3.8.0
+seaborn>=0.13.0
+plotly>=5.20.0
+
+# Model Saving & Export Utilities
+joblib>=1.4.0
