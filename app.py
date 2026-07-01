@@ -81,6 +81,7 @@ with col_controls:
         elif scenario_choice == "Heavy Monsoonal Escalation":
             input_sequence = [12.0, 25.4, 40.1, 55.0, 82.3]
     else:
+        prediction_output = 0.0
         st.markdown("**Fine-tune timelines manually via grid cell sliders:**")
         # 1. Force every single input variable to be completely flat (1D)
         d1_flat = np.array(d1).ravel()
