@@ -82,15 +82,21 @@ with col_controls:
             input_sequence = [12.0, 25.4, 40.1, 55.0, 82.3]
     else:
         st.markdown("**Fine-tune timelines manually via grid cell sliders:**")
-        d1 = st.slider("Day 1 (mm)", 0.0, 150.0, 5.0, step=0.5)
-        d2 = st.slider("Day 2 (mm)", 0.0, 150.0, 12.0, step=0.5)
-        d3 = st.slider("Day 3 (mm)", 0.0, 150.0, 28.0, step=0.5)
-        d4 = st.slider("Day 4 (mm)", 0.0, 150.0, 45.0, step=0.5)
-        d5 = st.slider("Day 5 (mm)", 0.0, 150.0, 75.0, step=0.5)
-        input_sequence = [d1[0], d2[0], d3[0], d4[0], d5[0]]
-
-    final_features = np.array(input_sequence).reshape(1, -1)
-    prediction_output = max(0.0, float(model.predict(final_features[0])))
+        # 1. Force every single input variable to be completely flat (1D)
+        d1_flat = np.array(d1).ravel()
+        d2_flat = np.array(d2).ravel()
+        d3_flat = np.array(d3).ravel()
+        d4_flat = np.array(d4).ravel()
+        d5_flat = np.array(d5).ravel()
+        
+        # 2. Concatenate them horizontally into one single row
+        final_features = np.concatenate([d1_flat, d2_flat, d3_flat, d4_flat, d5_flat]).reshape(1, -1)
+        
+        # 3. Print the shape to your Streamlit screen for temporary debugging
+        st.write(f"DEBUG - Final Features Shape: {final_features.shape}")
+        
+        # 4. Run the prediction
+        prediction_output = max(0.0, float(model.predict(final_features)[0]))
 
     # 3. Custom HTML Metrics Card Component
     html_metric_card = f"""
